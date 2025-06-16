@@ -1,0 +1,6 @@
+# requirements.txt
+langgraph
+pydantic
+langchain_mcp_adapters
+langchain_openai
+python-dotenv
