@@ -5,5 +5,6 @@ langchain_openai
 langchain_core
 langchain_community
 langchain_huggingface
+langchain_text_splitters
 sentence-transformers
 faiss-cpu
