@@ -2,6 +2,7 @@ import argparse
 import asyncio
 import os
 
+from dotenv import load_dotenv
 from langchain.agents import Tool
 from langchain_core.messages import AIMessage
 from langchain_openai import ChatOpenAI
@@ -22,6 +23,9 @@ tools = [
         description="用于读取链接内容"
     ),
 ]
+
+# Load environment variables
+load_dotenv()
 
 # 2. 初始化LLM
 model = ChatOpenAI(
