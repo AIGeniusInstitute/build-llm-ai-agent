@@ -14,7 +14,7 @@ load_dotenv()
 # LLM设置
 api_key = os.getenv("OPENAI_API_KEY")
 base_url = os.getenv("OPENAI_API_BASE")
-model_name = os.getenv("Doubao_Seed_16_Flash")
+model_name = os.getenv("Doubao_Seed_16")
 
 llm = ChatOpenAI(api_key=api_key, model=model_name, base_url=base_url)
 

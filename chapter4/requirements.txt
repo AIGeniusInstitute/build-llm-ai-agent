@@ -46,6 +46,8 @@ jiter==0.10.0
     # via openai
 jsonpatch==1.33
     # via langchain-core
+jsonpath-ng==1.7.0
+    # via redisvl
 jsonpointer==3.0.0
     # via jsonpatch
 langchain==0.3.25
@@ -67,7 +69,10 @@ langgraph==0.4.8
 langgraph-checkpoint==2.1.0
     # via
     #   langgraph
+    #   langgraph-checkpoint-redis
     #   langgraph-prebuilt
+langgraph-checkpoint-redis==0.0.6
+    # via -r requirements.in
 langgraph-prebuilt==0.2.2
     # via langgraph
 langgraph-sdk==0.1.70
@@ -78,6 +83,12 @@ langsmith==0.3.45
     #   langchain-core
 load-dotenv==0.1.0
     # via -r requirements.in
+ml-dtypes==0.5.1
+    # via redisvl
+numpy==1.26.4
+    # via
+    #   ml-dtypes
+    #   redisvl
 openai==1.88.0
     # via
     #   -r requirements.in
@@ -92,6 +103,8 @@ packaging==24.2
     # via
     #   langchain-core
     #   langsmith
+ply==3.11
+    # via jsonpath-ng
 pydantic==2.11.7
     # via
     #   fastapi
@@ -100,14 +113,29 @@ pydantic==2.11.7
     #   langgraph
     #   langsmith
     #   openai
+    #   redisvl
 pydantic-core==2.33.2
     # via pydantic
 python-dotenv==1.1.0
     # via load-dotenv
+python-ulid==3.0.0
+    # via
+    #   langgraph-checkpoint-redis
+    #   redisvl
 pyyaml==6.0.2
     # via
     #   langchain
     #   langchain-core
+    #   redisvl
+redis==6.2.0
+    # via
+    #   -r requirements.in
+    #   langgraph-checkpoint-redis
+    #   redisvl
+redisvl==0.7.0
+    # via
+    #   -r requirements.in
+    #   langgraph-checkpoint-redis
 regex==2024.11.6
     # via tiktoken
 requests==2.32.4
@@ -127,7 +155,9 @@ sqlalchemy==2.0.41
 starlette==0.46.2
     # via fastapi
 tenacity==9.1.2
-    # via langchain-core
+    # via
+    #   langchain-core
+    #   redisvl
 tiktoken==0.9.0
     # via langchain-openai
 tqdm==4.67.1
@@ -144,7 +174,7 @@ typing-extensions==4.14.0
     #   typing-inspection
 typing-inspection==0.4.1
     # via pydantic
-urllib3==2.4.0
+urllib3==1.26.20
     # via requests
 uvicorn==0.34.3
     # via -r requirements.in

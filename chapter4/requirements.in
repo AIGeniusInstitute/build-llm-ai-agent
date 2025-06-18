@@ -5,3 +5,6 @@ uvicorn
 openai
 langchain_openai
 load_dotenv
+redis
+langgraph-checkpoint-redis
+redisvl
