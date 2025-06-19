@@ -53,7 +53,7 @@ workflow.add_edge("__start__", "model")
 workflow.add_edge("model", END)
 
 # For the first time, you need to create an index
-# checkpointer.setup()
+checkpointer.setup()
 
 # build graph
 app = workflow.compile(checkpointer=checkpointer)
