@@ -112,8 +112,6 @@ if __name__ == '__main__':
 
     # 查看所有 key
     print(redis_client.keys("*"))
-    print(redis_client.get(f"thread_state:{session_1}"))
-    print(redis_client.get(f"thread_state:{session_2}"))
 
     # 清理测试数据
     # redis_client.delete(f"thread_state:{session_1}")
