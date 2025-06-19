@@ -8,6 +8,8 @@ from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.redis import RedisSaver
 from langgraph.graph import StateGraph, END
 from langgraph.graph.message import add_messages
+from typing import TypedDict
+from typing_extensions import Annotated
 
 # 加载环境变量
 load_dotenv()
@@ -43,11 +45,11 @@ checkpointer = RedisSaver(redis_client=redis_client)
 
 # --- Graph 构建 ---
 # 定义状态
-class State(dict):
-    messages: list[BaseMessage]
+class State(TypedDict):
+    messages: Annotated[list, add_messages]
 
 
-workflow = StateGraph(State, {"messages": add_messages})
+workflow = StateGraph(State)
 workflow.add_node("model", call_model)
 workflow.add_edge("__start__", "model")
 workflow.add_edge("model", END)
