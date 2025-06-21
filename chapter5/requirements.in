@@ -1,0 +1,14 @@
+langchain
+langgraph
+fastapi
+uvicorn
+pydantic
+requests
+openai
+langchain_openai
+load_dotenv
+redis
+langgraph-checkpoint-redis
+redisvl
+arxiv
+PyPDF2
