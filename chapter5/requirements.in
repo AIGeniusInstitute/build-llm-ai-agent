@@ -13,3 +13,5 @@ redisvl
 arxiv
 PyPDF2
 langchain_text_splitters
+faiss-cpu
+sentence-transformers
