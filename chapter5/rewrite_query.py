@@ -7,7 +7,7 @@ from langchain_openai import ChatOpenAI
 
 load_dotenv()
 
-# LLM and Graph setup
+# LLM Setup
 api_key = os.getenv("OPENAI_API_KEY")
 base_url = os.getenv("OPENAI_API_BASE")
 model_name = os.getenv("Doubao_Seed_16_Flash")

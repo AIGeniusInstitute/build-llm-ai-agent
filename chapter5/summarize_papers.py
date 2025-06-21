@@ -12,16 +12,21 @@ base_url = os.getenv("OPENAI_API_BASE")
 model_name = os.getenv("Doubao_Seed_16_Flash")
 llm = ChatOpenAI(api_key=api_key, model=model_name, base_url=base_url)
 
-def classify_query_intent(query):
-    prompt = f"""
-    请判断以下学术查询属于哪一类意图（综述、方法对比、引用追溯、趋势分析、其他）：
-    查询内容：{query}
-    只输出类别名称。
-    """
+
+def summarize_papers(paper_chunks):
+    prompt = "请根据以下多篇论文的内容，生成一段简明的综述，突出主要创新点和研究趋势：\n"
+    for chunk in paper_chunks:
+        prompt += f"- {chunk}\n"
+
     response = llm.invoke([HumanMessage(content=prompt)])
 
     return response.content.strip()
 
+
 # 示例
-intent = classify_query_intent("请比较BERT和GPT在文本生成上的异同")
-print(intent)  # 输出：方法对比
+chunks = [
+    "本文提出了基于注意力机制的Transformer模型...",
+    "我们改进了Transformer结构，提升了效率..."
+]
+summary = summarize_papers(chunks)
+print(summary)
