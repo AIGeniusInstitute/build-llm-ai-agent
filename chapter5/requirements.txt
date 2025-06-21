@@ -67,7 +67,9 @@ langchain-core==0.3.65
 langchain-openai==0.3.23
     # via -r requirements.in
 langchain-text-splitters==0.3.8
-    # via langchain
+    # via
+    #   -r requirements.in
+    #   langchain
 langgraph==0.4.8
     # via -r requirements.in
 langgraph-checkpoint==2.1.0

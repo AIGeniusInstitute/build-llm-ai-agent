@@ -12,3 +12,4 @@ langgraph-checkpoint-redis
 redisvl
 arxiv
 PyPDF2
+langchain_text_splitters
