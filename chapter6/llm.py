@@ -1,4 +1,4 @@
-# cot_paper_chain.py
+# llm.py
 import os
 
 from dotenv import load_dotenv
@@ -8,7 +8,7 @@ from langchain_openai import ChatOpenAI
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 base_url = os.getenv("OPENAI_API_BASE")
-model_name = os.getenv("Doubao_Seed_16_Thinking")  # 可替换为实际模型名
+model_name = os.getenv("Doubao_15Pro")  # 可替换为实际模型名
 
 llm = ChatOpenAI(api_key=api_key, model=model_name, base_url=base_url)
 

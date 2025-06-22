@@ -6,17 +6,30 @@
 #
 --index-url https://bytedpypi.byted.org/simple/
 
+aiohappyeyeballs==2.6.1
+    # via aiohttp
+aiohttp==3.12.13
+    # via langchain-community
+aiosignal==1.3.2
+    # via aiohttp
+altair==5.5.0
+    # via streamlit
 annotated-types==0.7.0
     # via pydantic
 anyio==4.9.0
     # via
     #   httpx
-    #   mcp
     #   openai
-    #   sse-starlette
     #   starlette
-arxiv==2.2.0
-    # via -r requirements.in
+attrs==25.3.0
+    # via
+    #   aiohttp
+    #   jsonschema
+    #   referencing
+blinker==1.9.0
+    # via streamlit
+cachetools==6.1.0
+    # via streamlit
 certifi==2025.6.15
     # via
     #   httpcore
@@ -25,92 +38,88 @@ certifi==2025.6.15
 charset-normalizer==3.4.2
     # via requests
 click==8.2.1
-    # via uvicorn
+    # via
+    #   streamlit
+    #   uvicorn
 contourpy==1.3.2
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
+dataclasses-json==0.6.7
+    # via langchain-community
 distro==1.9.0
     # via openai
-faiss-cpu==1.11.0
-    # via -r requirements.in
 fastapi==0.115.13
     # via -r requirements.in
-feedparser==6.0.11
-    # via arxiv
-filelock==3.18.0
-    # via
-    #   huggingface-hub
-    #   torch
-    #   transformers
 fonttools==4.58.4
     # via matplotlib
-fsspec==2025.5.1
+frozenlist==1.7.0
     # via
-    #   huggingface-hub
-    #   torch
+    #   aiohttp
+    #   aiosignal
+gitdb==4.0.12
+    # via gitpython
+gitpython==3.1.44
+    # via streamlit
 h11==0.16.0
     # via
     #   httpcore
     #   uvicorn
-hf-xet==1.1.5
-    # via huggingface-hub
 httpcore==1.0.9
     # via httpx
 httpx==0.28.1
     # via
     #   langgraph-sdk
     #   langsmith
-    #   mcp
     #   openai
 httpx-sse==0.4.0
-    # via mcp
-huggingface-hub==0.33.0
-    # via
-    #   sentence-transformers
-    #   tokenizers
-    #   transformers
+    # via langchain-community
 idna==3.10
     # via
     #   anyio
     #   httpx
     #   requests
+    #   yarl
 jieba==0.42.1
     # via -r requirements.in
 jinja2==3.1.6
-    # via torch
+    # via
+    #   altair
+    #   pydeck
 jiter==0.10.0
     # via openai
-joblib==1.5.1
-    # via scikit-learn
 jsonpatch==1.33
     # via langchain-core
 jsonpath-ng==1.7.0
     # via redisvl
 jsonpointer==3.0.0
     # via jsonpatch
+jsonschema==4.24.0
+    # via altair
+jsonschema-specifications==2025.4.1
+    # via jsonschema
 kiwisolver==1.4.8
     # via matplotlib
-langchain==0.3.25
+langchain==0.3.26
+    # via
+    #   -r requirements.in
+    #   langchain-community
+langchain-community==0.3.26
     # via -r requirements.in
-langchain-core==0.3.65
+langchain-core==0.3.66
     # via
     #   -r requirements.in
     #   langchain
-    #   langchain-mcp-adapters
+    #   langchain-community
     #   langchain-openai
     #   langchain-text-splitters
     #   langgraph
     #   langgraph-checkpoint
     #   langgraph-prebuilt
-langchain-mcp-adapters==0.1.7
-    # via -r requirements.in
-langchain-openai==0.3.23
+langchain-openai==0.3.24
     # via -r requirements.in
 langchain-text-splitters==0.3.8
-    # via
-    #   -r requirements.in
-    #   langchain
+    # via langchain
 langgraph==0.4.8
     # via -r requirements.in
 langgraph-checkpoint==2.1.0
@@ -118,44 +127,48 @@ langgraph-checkpoint==2.1.0
     #   langgraph
     #   langgraph-checkpoint-redis
     #   langgraph-prebuilt
-langgraph-checkpoint-redis==0.0.6
+langgraph-checkpoint-redis==0.0.7
     # via -r requirements.in
 langgraph-prebuilt==0.2.2
     # via langgraph
 langgraph-sdk==0.1.70
     # via langgraph
-langsmith==0.3.45
+langsmith==0.4.1
     # via
     #   langchain
+    #   langchain-community
     #   langchain-core
 load-dotenv==0.1.0
     # via -r requirements.in
 markupsafe==3.0.2
     # via jinja2
+marshmallow==3.26.1
+    # via dataclasses-json
 matplotlib==3.10.3
     # via -r requirements.in
-mcp==1.9.4
-    # via langchain-mcp-adapters
 ml-dtypes==0.5.1
     # via redisvl
-mpmath==1.3.0
-    # via sympy
+multidict==6.5.0
+    # via
+    #   aiohttp
+    #   yarl
+mypy-extensions==1.1.0
+    # via typing-inspect
 mysql-connector-python==9.3.0
     # via -r requirements.in
-networkx==3.5
-    # via torch
+narwhals==1.43.1
+    # via altair
 numpy==1.26.4
     # via
     #   contourpy
-    #   faiss-cpu
+    #   langchain-community
     #   matplotlib
     #   ml-dtypes
     #   pandas
+    #   pydeck
     #   redisvl
-    #   scikit-learn
-    #   scipy
-    #   transformers
-openai==1.88.0
+    #   streamlit
+openai==1.90.0
     # via
     #   -r requirements.in
     #   langchain-openai
@@ -167,20 +180,30 @@ ormsgpack==1.10.0
     # via langgraph-checkpoint
 packaging==24.2
     # via
-    #   faiss-cpu
-    #   huggingface-hub
+    #   altair
     #   langchain-core
     #   langsmith
+    #   marshmallow
     #   matplotlib
-    #   transformers
+    #   streamlit
 pandas==2.3.0
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   streamlit
 pillow==11.2.1
     # via
     #   matplotlib
-    #   sentence-transformers
+    #   streamlit
 ply==3.11
     # via jsonpath-ng
+propcache==0.3.2
+    # via
+    #   aiohttp
+    #   yarl
+protobuf==6.31.1
+    # via streamlit
+pyarrow==20.0.0
+    # via streamlit
 pydantic==2.11.7
     # via
     #   -r requirements.in
@@ -189,18 +212,17 @@ pydantic==2.11.7
     #   langchain-core
     #   langgraph
     #   langsmith
-    #   mcp
     #   openai
     #   pydantic-settings
     #   redisvl
 pydantic-core==2.33.2
     # via pydantic
 pydantic-settings==2.10.0
-    # via mcp
+    # via langchain-community
+pydeck==0.9.1
+    # via streamlit
 pyparsing==3.2.3
     # via matplotlib
-pypdf2==3.0.1
-    # via -r requirements.in
 python-dateutil==2.9.0.post0
     # via
     #   matplotlib
@@ -210,8 +232,6 @@ python-dotenv==1.1.0
     #   -r requirements.in
     #   load-dotenv
     #   pydantic-settings
-python-multipart==0.0.20
-    # via mcp
 python-ulid==3.0.0
     # via
     #   langgraph-checkpoint-redis
@@ -220,11 +240,10 @@ pytz==2025.2
     # via pandas
 pyyaml==6.0.2
     # via
-    #   huggingface-hub
     #   langchain
+    #   langchain-community
     #   langchain-core
     #   redisvl
-    #   transformers
 redis==6.2.0
     # via
     #   -r requirements.in
@@ -234,40 +253,35 @@ redisvl==0.7.0
     # via
     #   -r requirements.in
     #   langgraph-checkpoint-redis
-regex==2024.11.6
+referencing==0.36.2
     # via
-    #   tiktoken
-    #   transformers
+    #   jsonschema
+    #   jsonschema-specifications
+regex==2024.11.6
+    # via tiktoken
 requests==2.32.4
     # via
     #   -r requirements.in
-    #   arxiv
-    #   huggingface-hub
     #   langchain
+    #   langchain-community
     #   langsmith
     #   requests-toolbelt
+    #   streamlit
     #   tiktoken
-    #   transformers
 requests-toolbelt==1.0.0
     # via langsmith
 rouge==1.0.1
     # via -r requirements.in
-safetensors==0.5.3
-    # via transformers
-scikit-learn==1.7.0
-    # via sentence-transformers
-scipy==1.15.3
+rpds-py==0.25.1
     # via
-    #   scikit-learn
-    #   sentence-transformers
-sentence-transformers==4.1.0
-    # via -r requirements.in
-sgmllib3k==1.0.0
-    # via feedparser
+    #   jsonschema
+    #   referencing
 six==1.17.0
     # via
     #   python-dateutil
     #   rouge
+smmap==5.0.2
+    # via gitdb
 sniffio==1.3.1
     # via
     #   anyio
@@ -276,60 +290,54 @@ sqlalchemy==2.0.41
     # via
     #   -r requirements.in
     #   langchain
-sse-starlette==2.3.6
-    # via mcp
+    #   langchain-community
 starlette==0.46.2
-    # via
-    #   fastapi
-    #   mcp
-sympy==1.14.0
-    # via torch
+    # via fastapi
+streamlit==1.46.0
+    # via -r requirements.in
 tenacity==9.1.2
     # via
+    #   langchain-community
     #   langchain-core
     #   redisvl
-threadpoolctl==3.6.0
-    # via scikit-learn
+    #   streamlit
 tiktoken==0.9.0
     # via langchain-openai
-tokenizers==0.21.1
-    # via transformers
-torch==2.7.1
-    # via sentence-transformers
+toml==0.10.2
+    # via streamlit
+tornado==6.5.1
+    # via streamlit
 tqdm==4.67.1
-    # via
-    #   huggingface-hub
-    #   openai
-    #   sentence-transformers
-    #   transformers
-transformers==4.52.4
-    # via sentence-transformers
+    # via openai
 typing-extensions==4.14.0
     # via
+    #   altair
     #   anyio
     #   fastapi
-    #   huggingface-hub
     #   langchain-core
     #   openai
     #   pydantic
     #   pydantic-core
-    #   sentence-transformers
+    #   referencing
     #   sqlalchemy
-    #   torch
+    #   streamlit
+    #   typing-inspect
     #   typing-inspection
+typing-inspect==0.9.0
+    # via dataclasses-json
 typing-inspection==0.4.1
     # via
     #   pydantic
     #   pydantic-settings
 tzdata==2025.2
     # via pandas
-urllib3==1.26.20
+urllib3==2.5.0
     # via requests
 uvicorn==0.34.3
-    # via
-    #   -r requirements.in
-    #   mcp
+    # via -r requirements.in
 xxhash==3.5.0
     # via langgraph
+yarl==1.20.1
+    # via aiohttp
 zstandard==0.23.0
     # via langsmith
