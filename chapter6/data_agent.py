@@ -138,6 +138,25 @@ def predict_tool(input_str: str):
     return f"基于历史数据，预测当 {x_key} 为 {next_x_label} 时, {y_key} 的值为: {prediction:.2f}"
 
 
+def data_insight_tool(input_str: str):
+    """
+    根据输入的数据（通常是SQL查询结果）生成业务洞察。
+    输入应该是一个描述业务数据的字符串。
+    """
+    prompt = f"""你是一位资深的业务数据分析师。请根据以下数据，生成深刻的业务洞察和具体的建议。请用清晰、简洁的语言表达，并突出关键发现。
+
+数据:
+{input_str}
+
+你的分析应包括：
+1. 关键发现：数据中最重要的趋势、异常或模式是什么？
+2. 业务洞察：这些发现对业务意味着什么？
+3. 行动建议：基于这些洞察，我们应该采取哪些具体步骤？
+"""
+    response = llm.invoke(prompt)
+    return getattr(response, 'content', response)
+
+
 # 工具列表
 tools = [
     Tool(
@@ -149,6 +168,11 @@ tools = [
         name="数据预测",
         func=predict_tool,
         description='用于根据历史数据进行线性回归预测。输入应该是一个字典列表的字符串，例如：`[{"季度": 1, "销售额": 32000}, {"季度": 2, "销售额": 35000}]`。'
+    ),
+    Tool(
+        name="数据洞察",
+        func=data_insight_tool,
+        description='用于根据输入的数据（通常是SQL查询结果）生成业务洞察。'
     )
 ]
 
