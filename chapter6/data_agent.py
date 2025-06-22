@@ -1,7 +1,6 @@
 import ast
 import io
 
-import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
 import pandas as pd
 from dotenv import load_dotenv
@@ -21,7 +20,6 @@ db = SQLDatabase.from_uri("mysql+mysqlconnector://root:88888888@localhost:3306/s
 # 可视化工具
 def plot_tool(query_result: str):
     """将查询结果字符串转换为图表, 并将图表保存为 sales_trend.png 文件。"""
-
     # query_result为字符串，需转为DataFrame
     try:
         data = ast.literal_eval(query_result)
@@ -36,26 +34,10 @@ def plot_tool(query_result: str):
     if df.empty or len(df.columns) < 2:
         return "数据为空或列数不足，无法绘图。"
 
-    try:
-        font_path = fm.findfont(fm.FontProperties(family='STHeiti'))
-        prop = fm.FontProperties(fname=font_path)
-        plt.rcParams['font.family'] = prop.get_name()
-    except fm.FontNotFoundError:
-        print("STKaiti font not found. Please check your font installation.")
-
-    # 示例绘图代码
     plt.figure(figsize=(8, 5))
-    plt.plot([1, 2, 3, 4], [1, 4, 9, 16], marker='o')
-    plt.title("销售趋势")
-    plt.xlabel("X轴")
-    plt.ylabel("Y轴")
-    plt.grid(True)
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.show()
-
-    plt.figure(figsize=(8, 5))
-    plt.plot(df.iloc[:, 0], df.iloc[:, 1], marker='o')
+    x_data = df.iloc[:, 0]
+    y_data = df.iloc[:, 1]
+    plt.plot(x_data, y_data, marker='o')
     plt.title("Sales Trend")
     plt.xlabel(str(df.columns[0]))
     plt.ylabel(str(df.columns[1]))
