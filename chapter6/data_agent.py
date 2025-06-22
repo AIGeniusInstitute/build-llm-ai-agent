@@ -1,6 +1,9 @@
 # data_agent.py
 import ast
 
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from dotenv import load_dotenv
@@ -75,12 +78,77 @@ def plot_tool(input_str: str):
     return f"成功将图表保存为 {filename}"
 
 
+def predict_tool(input_str: str):
+    """根据历史数据使用线性回归进行预测。输入应该是一个包含历史数据的字典列表字符串。"""
+    try:
+        data = ast.literal_eval(input_str)
+        if isinstance(data, str):
+            data = ast.literal_eval(data)
+    except (ValueError, SyntaxError) as e:
+        return f"无法解析输入字符串: {input_str}. 错误: {e}"
+
+    if not isinstance(data, list) or not data or not all(isinstance(d, dict) for d in data):
+        return "输入数据格式错误，应为非空字典列表。"
+
+    # 动态识别 x 和 y 的键
+    first_item_keys = list(data[0].keys())
+    if len(first_item_keys) < 2:
+        return "数据字典中至少需要两个键。"
+
+    # 假设第一个键是x，第二个键是y
+    x_key, y_key = first_item_keys[0], first_item_keys[1]
+
+    try:
+        x_values_raw = [d[x_key] for d in data]
+        y_values = np.array([d[y_key] for d in data])
+
+        # 检查x值是否为字符串，如果是，则转换为数值
+        if isinstance(x_values_raw[0], str):
+            try:
+                # 尝试将日期字符串转换为时间戳
+                x_values = pd.to_datetime(x_values_raw).astype(np.int64) // 10**9
+                x_values = x_values.to_numpy().reshape(-1, 1)
+                is_date = True
+            except (ValueError, TypeError):
+                # 如果不是日期，则使用索引作为x值
+                x_values = np.arange(len(x_values_raw)).reshape(-1, 1)
+                is_date = False
+        else:
+            x_values = np.array(x_values_raw).reshape(-1, 1)
+            is_date = False
+
+    except (KeyError, TypeError):
+        return f"无法从数据中提取有效的数值。请确保 '{x_key}' 和 '{y_key}' 的值是数字。"
+
+    model = LinearRegression().fit(x_values, y_values)
+    
+    if is_date:
+        # 预测下一个时间点
+        last_timestamp = pd.to_datetime(x_values_raw[-1]).timestamp()
+        # 假设下一个时间点是一个月后
+        next_timestamp = last_timestamp + 30 * 24 * 3600 
+        next_x_numeric = np.array([[next_timestamp]])
+        next_x_label = pd.to_datetime(next_timestamp, unit='s').strftime('%Y-%m-%d')
+    else:
+        next_x_numeric = np.array([[x_values.max() + 1]])
+        next_x_label = next_x_numeric[0][0]
+
+    prediction = model.predict(next_x_numeric)[0]
+
+    return f"基于历史数据，预测当 {x_key} 为 {next_x_label} 时, {y_key} 的值为: {prediction:.2f}"
+
+
 # 工具列表
 tools = [
     Tool(
         name="数据可视化",
         func=plot_tool,
         description='用于将数据可视化。输入应该是一个字典字符串，其中包含绘图所需的所有参数，例如：`{"data": [("2024-01", 12000)], "chart_type": "bar", "title": "Sales"}`。'
+    ),
+    Tool(
+        name="数据预测",
+        func=predict_tool,
+        description='用于根据历史数据进行线性回归预测。输入应该是一个字典列表的字符串，例如：`[{"季度": 1, "销售额": 32000}, {"季度": 2, "销售额": 35000}]`。'
     )
 ]
 
