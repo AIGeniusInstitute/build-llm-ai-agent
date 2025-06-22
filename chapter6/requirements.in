@@ -3,15 +3,9 @@ langgraph
 fastapi
 uvicorn
 pydantic
-requests
 openai
 langchain_openai
 load_dotenv
-redis
-langgraph-checkpoint-redis
-redisvl
-rouge
-jieba
 langchain-core
 python-dotenv
 sqlalchemy
